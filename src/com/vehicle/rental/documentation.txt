@@ -1,0 +1,131 @@
+Documentation and Implementation Guideline for Advanced Vehicle Rental Management System
+Overview
+This project is an Advanced Vehicle Rental Management System that demonstrates key Object-Oriented Programming (OOP) principles: Encapsulation, Inheritance, Polymorphism, Abstraction, and Composition. The system allows customers to rent different types of vehicles, earn and redeem loyalty points, and rate the vehicles they rent.
+
+Project Structure
+src/
+└── com/
+    └── vehicle/
+        └── rental/
+            ├── Car.java
+            ├── Customer.java
+            ├── Motorcycle.java
+            ├── Rentable.java
+            ├── RentalAgency.java
+            ├── RentalTransaction.java
+            ├── Truck.java
+            ├── Vehicle.java
+            ├── VehicleNotAvailableException.java
+            └── Main.java
+
+
+Class Descriptions
+Vehicle (Abstract Class)
+
+Fields: vehicleId, model, baseRentalRate, isAvailable, ratings
+Methods:
+public abstract double calculateRentalCost(int days)
+public abstract boolean isAvailableForRental()
+public void addRating(double rating)
+public double getAverageRating()
+public void setAvailable(boolean available)
+public boolean isAvailableForRental()
+Car, Truck, Motorcycle (Concrete Classes)
+
+Inheritance: Extend Vehicle
+Interface: Implement Rentable
+Methods:
+public void rent(Customer customer, int days) throws VehicleNotAvailableException
+public void returnVehicle()
+public double calculateRentalCost(int days)
+Rentable (Interface)
+
+Methods:
+void rent(Customer customer, int days) throws VehicleNotAvailableException
+void returnVehicle()
+Customer
+
+Fields: customerId, name, loyaltyPoints, rentalHistory, ratings
+Methods:
+public void earnPoints(int points)
+public int redeemPoints(int points)
+public int getPoints()
+public void addRating(double rating)
+public double getAverageRating()
+public void addRentalTransaction(RentalTransaction transaction)
+public List<RentalTransaction> getRentalHistory()
+RentalAgency
+
+Fields: fleet, transactions
+Methods:
+public void addVehicle(Vehicle vehicle)
+public void processRental(Customer customer, Vehicle vehicle, int days)
+public void returnVehicle(Vehicle vehicle)
+public List<Vehicle> getAvailableVehicles()
+public List<RentalTransaction> getRentalTransactions()
+RentalTransaction
+
+Fields: transactionId, customer, vehicle, rentalDays, rentalCost
+Methods:
+public RentalTransaction(String transactionId, Customer customer, Vehicle vehicle, int rentalDays, double rentalCost)
+public String getTransactionId()
+public Customer getCustomer()
+public Vehicle getVehicle()
+public int getRentalDays()
+public double getRentalCost()
+VehicleNotAvailableException
+
+Methods:
+public VehicleNotAvailableException(String message)
+
+Main
+
+Methods:
+public static void main(String[] args)
+Implementation Guidelines
+
+
+Encapsulation:
+
+Use private fields for all classes.
+Provide public getter and setter methods with validation.
+Protect sensitive data from direct modification.
+
+
+Inheritance:
+
+Create an abstract Vehicle class with common properties and methods.
+Extend Vehicle class to create Car, Truck, and Motorcycle classes.
+Use super() for parent class initialization.
+
+
+Polymorphism:
+
+Implement the Rentable interface in Car, Truck, and Motorcycle classes.
+Override methods in each vehicle class.
+Demonstrate method overloading and overriding.
+
+
+Abstraction:
+
+Use abstract classes and interfaces to hide complex implementation details.
+Provide clean, intuitive public interfaces.
+
+
+Composition:
+
+Design supporting classes like Customer, RentalAgency, and RentalTransaction.
+Use composition to manage relationships between classes.
+
+
+Exception Handling:
+
+Create custom exceptions like VehicleNotAvailableException for specific scenarios.
+Handle exceptions gracefully in the code.
+Testing
+
+Unit test each class independently.
+Test all possible scenarios.
+Validate encapsulation, inheritance, polymorphic behavior, and abstraction implementations.
+
+
